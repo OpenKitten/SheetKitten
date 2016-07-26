@@ -20,11 +20,10 @@ If you need anything, feel free to implement it and submit a pull request.
 
 ```swift
 extension Fish : SpreadsheetConvertible {
-	let numberOfRowsForSpreadshet: UInt = 4
 	let spreadsheetColumnTitles = ["Blub?", "Blub!", "Blubbbbb"]
 	
-	func getDataForSpreadsheet(atRow row: UInt) -> [String] {
-		// get data for a single row
+	func getDataForSpreadsheet() -> [[String]] {
+		// get data for the spreadsheet
 		// ...
 		
 		return data

@@ -1,14 +1,12 @@
 import Foundation
 
 public protocol SpreadsheetConvertible {
-    var numberOfRowsForSpreadsheet: UInt { get }
     var spreadsheetColumnTitles: [String] { get }
     
-    func getDataForSpreadsheet(atRow row: UInt) -> [String]
+    func makeDataForSpreadsheet() -> [[String]]
 }
 
 public func makeCSV(from source: SpreadsheetConvertible) -> String {
-    let numRows = source.numberOfRowsForSpreadsheet
     let titles = source.spreadsheetColumnTitles
     
     func escape(_ string: String) -> String {
@@ -23,8 +21,7 @@ public func makeCSV(from source: SpreadsheetConvertible) -> String {
     
     var csv = titles.map(escape).joined(separator: ",")
     
-    for i in 0..<numRows {
-        let data = source.getDataForSpreadsheet(atRow: i)
+    for data in source.makeDataForSpreadsheet() {
         let rowString = data.map(escape).joined(separator: ",")
         csv.append("\n\(rowString)")
     }
